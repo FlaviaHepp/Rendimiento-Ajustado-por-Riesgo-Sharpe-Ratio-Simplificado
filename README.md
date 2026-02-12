@@ -15,81 +15,70 @@ No todo rendimiento es igual:
 Este análisis responde a la pregunta clave:
 - ¿Qué ticker ofreció el mayor rendimiento semanal por cada unidad de riesgo tomada?
 
-🧩Metodología
+## 🧩Metodología
 
-Para cada ticker_id, se calculan tres métricas sobre los últimos 7 días:
-- Rendimiento promedio semanal
+Para cada ticker:
 
-AVG(𝐶𝑙𝑜𝑠𝑒−𝑂𝑝𝑒𝑛/𝑂𝑝𝑒𝑛)
-​
-Volatilidad semanal
+*Se calcula el rendimiento diario:*
 
-Medida como la desviación estándar del rendimiento diario absoluto.
+(close - open) / open
 
-Proxy del Ratio de Sharpe
 
-Rendimiento Promedio
-Volatilidad
-Volatilidad
-Rendimiento Promedio
+Se obtiene:
+
+Rendimiento promedio en el período
+
+Desviación estándar de los retornos (proxy de volatilidad)
+
+*Se calcula el Sharpe simplificado:*
+
+Sharpe = Rendimiento Promedio / Volatilidad
 	​
-
 
 ⚠️ Nota:
 Este no es un Sharpe Ratio académico (no incluye tasa libre de riesgo), sino una métrica operativa, útil para comparación rápida entre activos.
 
-Interpretación de Resultados
+## 📊Interpretación de Resultados
 
-Proxy Sharpe alto
+*Proxy Sharpe alto*
 👉 Buen retorno con baja volatilidad → activo eficiente.
 
-Proxy Sharpe bajo o negativo
+*Proxy Sharpe bajo o negativo*
 👉 Retornos pobres o excesivamente volátiles.
 
-Ranking descendente
+*Ranking descendente*
 Permite detectar rápidamente los mejores candidatos para:
+- Rotación de capital
+- Selección de activos líderes
+- Filtrado previo a estrategias más complejas
 
-Rotación de capital
+## 🔧Casos de Uso
 
-Selección de activos líderes
+- Screen inicial de activos para trading semanal
+- Comparación objetiva entre acciones de distintos sectores
+- Validación cuantitativa de “buen rendimiento”
+- Inputs para modelos de asignación de capital
 
-Filtrado previo a estrategias más complejas
-
-Casos de Uso
-
-Screen inicial de activos para trading semanal
-
-Comparación objetiva entre acciones de distintos sectores
-
-Validación cuantitativa de “buen rendimiento”
-
-Inputs para modelos de asignación de capital
-
-Requisitos de Datos
+*Requisitos de Datos*
 
 Tablas necesarias:
+- precios_diarios
+- ticker_id
+- fecha
+- open
+- close
 
-precios_diarios
+## ⚠️Limitaciones
 
-ticker_id
+- No contempla tasa libre de riesgo
+- Usa datos intradía simples (open/close)
+- Sensible a outliers en períodos cortos
+- Aun así, es rápido, robusto y extremadamente útil como filtro inicial.
 
-fecha
-
-open
-
-close
-
-Limitaciones
-
-No contempla tasa libre de riesgo
-
-Usa datos intradía simples (open/close)
-
-Sensible a outliers en períodos cortos
-
-Aun así, es rápido, robusto y extremadamente útil como filtro inicial.
-
-Conclusión
+## ✒️Conclusión
 
 Este proyecto transforma precios diarios en una métrica clara de eficiencia riesgo-retorno, ideal para decisiones rápidas y comparativas.
 Es una pieza fundamental en cualquier pipeline cuantitativo orientado a selección de activos.
+
+## 👤Autora
+Flavia Hepp Proyecto de SQL aplicó un análisis de riesgo basado en eventos.
